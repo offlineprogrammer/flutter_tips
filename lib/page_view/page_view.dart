@@ -22,6 +22,13 @@ class MyApp extends StatelessWidget {
 class MyStatelessWidget extends StatelessWidget {
   MyStatelessWidget({Key? key}) : super(key: key);
 
+  // The pages to be displayed in PageView
+  final List<Widget> pages = [
+    _buildPage('Page 1', Colors.pink),
+    _buildPage('Page 2', Colors.green),
+    _buildPage('Page 3', Colors.deepPurple),
+  ];
+
   // A helper method to build a page
   static Widget _buildPage(String title, Color color) {
     return Container(
@@ -34,13 +41,6 @@ class MyStatelessWidget extends StatelessWidget {
       ),
     );
   }
-
-  // The pages to be displayed in PageView
-  final List<Widget> pages = [
-    _buildPage('Page 1', Colors.pink),
-    _buildPage('Page 2', Colors.green),
-    _buildPage('Page 3', Colors.deepPurple),
-  ];
 
   @override
   Widget build(BuildContext context) {
