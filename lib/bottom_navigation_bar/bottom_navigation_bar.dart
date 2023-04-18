@@ -25,12 +25,6 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   static Widget _buildPage(IconData icon, Color color) {
     return Container(
       color: color,
@@ -49,6 +43,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     _buildPage(Icons.business, Colors.green),
     _buildPage(Icons.school, Colors.deepPurple),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
