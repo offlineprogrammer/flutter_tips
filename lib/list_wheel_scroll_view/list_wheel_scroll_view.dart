@@ -23,6 +23,18 @@ class MyApp extends StatelessWidget {
 class MyStatelessWidget extends StatelessWidget {
   MyStatelessWidget({Key? key}) : super(key: key);
 
+  // The items to be displayed in ListWheelScrollView
+  final List<Widget> items = [
+    _buildListItem('Airport', Colors.pink, Icons.local_airport),
+    _buildListItem('Dining', Colors.green, Icons.local_dining),
+    _buildListItem('Drink', Colors.deepPurple, Icons.local_drink),
+    _buildListItem('Florist', Colors.amber, Icons.local_florist),
+    _buildListItem('Gas', Colors.teal, Icons.local_gas_station),
+    _buildListItem('Grocery', Colors.indigo, Icons.local_grocery_store),
+    _buildListItem('ATM', Colors.cyan, Icons.local_atm),
+    _buildListItem('Coffee', Colors.lime, Icons.local_cafe),
+  ];
+
   // A helper method to build a list item
   static Widget _buildListItem(String title, Color color, IconData icon) {
     return Container(
@@ -48,18 +60,6 @@ class MyStatelessWidget extends StatelessWidget {
       ),
     );
   }
-
-  // The items to be displayed in ListWheelScrollView
-  final List<Widget> items = [
-    _buildListItem('Airport', Colors.pink, Icons.local_airport),
-    _buildListItem('Dining', Colors.green, Icons.local_dining),
-    _buildListItem('Drink', Colors.deepPurple, Icons.local_drink),
-    _buildListItem('Florist', Colors.amber, Icons.local_florist),
-    _buildListItem('Gas', Colors.teal, Icons.local_gas_station),
-    _buildListItem('Grocery', Colors.indigo, Icons.local_grocery_store),
-    _buildListItem('ATM', Colors.cyan, Icons.local_atm),
-    _buildListItem('Coffee', Colors.lime, Icons.local_cafe),
-  ];
 
   @override
   Widget build(BuildContext context) {
