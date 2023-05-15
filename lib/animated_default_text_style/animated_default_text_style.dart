@@ -34,7 +34,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Color _color = Colors.blue;
   double _fontSize = 20.0;
-  Random _random = Random();
+  final Random _random = Random();
 
   void randomTextStyle() {
     setState(() {
