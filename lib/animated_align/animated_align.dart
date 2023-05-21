@@ -54,19 +54,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           const SizedBox(
             height: 20,
           ),
-          AnimatedCrossFade(
-            crossFadeState: isPressed
-                ? CrossFadeState.showFirst
-                : CrossFadeState.showSecond,
-            duration: const Duration(seconds: 1),
-            firstChild: const FlutterLogo(
-              style: FlutterLogoStyle.markOnly,
-              size: 250,
-            ),
-            secondChild: const FlutterLogo(
-              style: FlutterLogoStyle.stacked,
-              size: 250,
-            ),
+          SizedBox(
+            height: 500,
+            child: AnimatedAlign(
+                alignment:
+                    isPressed ? Alignment.bottomCenter : Alignment.topCenter,
+                duration: const Duration(seconds: 2),
+                curve: Curves.linear,
+                child: const FlutterLogo(
+                  size: 200,
+                )),
           ),
         ],
       ),
