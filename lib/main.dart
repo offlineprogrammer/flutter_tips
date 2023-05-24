@@ -10,7 +10,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
@@ -21,14 +20,16 @@ class MyApp extends StatelessWidget {
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  const MyStatefulWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double radiusValue = 1;
+  double logoSize = 200;
 
   @override
   Widget build(BuildContext context) {
@@ -39,36 +40,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           const SizedBox(
             height: 20,
           ),
-          Slider(
-            value: radiusValue,
-            min: 1,
-            max: 10,
-            onChanged: (double value) {
-              setState(() => radiusValue = value);
+          TextButton(
+            onPressed: () {
+              setState(() {
+                logoSize = logoSize == 200 ? 400 : 200;
+              });
             },
+            child: const Text(
+              'Click Me',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return RadialGradient(
-                center: Alignment.bottomRight,
-                radius: radiusValue,
-                colors: const <Color>[
-                  Colors.yellow,
-                  Colors.deepOrangeAccent,
-                  Colors.deepPurpleAccent,
-                  Colors.blueAccent,
-                  Colors.greenAccent,
-                  Colors.redAccent,
-                ],
-                tileMode: TileMode.mirror,
-              ).createShader(bounds);
+          TweenAnimationBuilder(
+            tween: Tween<double>(begin: 0, end: logoSize),
+            duration: const Duration(milliseconds: 250),
+            builder: (context, value, child) {
+              return FlutterLogo(
+                size: value,
+              );
             },
-            child: const FlutterLogo(
-              size: 500,
-            ),
           ),
         ],
       ),
