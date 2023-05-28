@@ -10,60 +10,51 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData.dark(),
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
-        body: const MyStatefulWidget(),
+        body: const MyStatelessWidget(),
       ),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double logoSize = 200;
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const SizedBox(
-            height: 20,
-          ),
-          TextButton(
-            onPressed: () {
-              setState(() {
-                logoSize = logoSize == 200 ? 400 : 200;
-              });
-            },
-            child: const Text(
-              'Click Me',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          TweenAnimationBuilder(
-            tween: Tween<double>(begin: 0, end: logoSize),
-            duration: const Duration(milliseconds: 250),
-            builder: (context, value, child) {
-              return FlutterLogo(
-                size: value,
+      child: ElevatedButton(
+        child: const Text('Show Bottom Sheet'),
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return SizedBox(
+                height: 300,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: const Text(
+                          'Close',
+                          style: TextStyle(fontSize: 20),
+                        )),
+                    const FlutterLogo(
+                      size: 150,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
               );
             },
-          ),
-        ],
+          );
+        },
       ),
     );
   }
