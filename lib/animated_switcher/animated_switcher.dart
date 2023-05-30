@@ -30,7 +30,25 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double padding = 10;
+  int selectedWidget = 1;
+
+  static Widget selectWidget(int selectedWidget) {
+    return selectedWidget == 1 ? buildFlutterLogo() : buildDashIcon();
+  }
+
+  static Widget buildFlutterLogo() {
+    return const FlutterLogo(
+      size: 300,
+    );
+  }
+
+  static Widget buildDashIcon() {
+    return const Icon(
+      Icons.flutter_dash,
+      size: 300,
+      color: Colors.blue,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,25 +58,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           const SizedBox(
             height: 20,
           ),
-          Slider(
-            value: padding,
-            min: 10,
-            max: 80,
-            onChanged: (double value) {
-              setState(() => padding = value);
+          TextButton(
+            onPressed: () {
+              setState(() {
+                selectedWidget = selectedWidget == 1 ? 2 : 1;
+              });
             },
+            child: const Text(
+              'Click Me',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          AnimatedPadding(
-            padding: EdgeInsets.all(padding),
+          AnimatedSwitcher(
             duration: const Duration(seconds: 1),
-            child: Container(
-              color: Colors.blue,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
-            ),
+            child: selectWidget(selectedWidget),
+            transitionBuilder: (child, animation) {
+              return RotationTransition(
+                turns: animation,
+                child: child,
+              );
+            },
           )
         ],
       ),

@@ -31,7 +31,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   double padding = 10;
-
   @override
   Widget build(BuildContext context) {
     return Center(

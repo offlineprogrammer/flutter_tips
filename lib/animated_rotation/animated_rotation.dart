@@ -30,36 +30,39 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double padding = 10;
+  double turns = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(
             height: 20,
           ),
-          Slider(
-            value: padding,
-            min: 10,
-            max: 80,
-            onChanged: (double value) {
-              setState(() => padding = value);
+          TextButton(
+            onPressed: () {
+              setState(() {
+                turns = turns + 0.25;
+              });
             },
+            child: const Text(
+              'Click Me',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          AnimatedPadding(
-            padding: EdgeInsets.all(padding),
+          AnimatedRotation(
+            turns: turns,
             duration: const Duration(seconds: 1),
-            child: Container(
-              color: Colors.blue,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height / 2,
+            curve: Curves.easeInCubic,
+            child: const FlutterLogo(
+              size: 200,
             ),
-          )
+          ),
         ],
       ),
     );
