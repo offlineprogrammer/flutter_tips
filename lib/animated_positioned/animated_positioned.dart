@@ -30,7 +30,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double size = 100;
+  bool selected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -40,24 +40,43 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           const SizedBox(
             height: 20,
           ),
-          Slider(
-            value: size,
-            min: 100,
-            max: 400,
-            onChanged: (double value) {
-              setState(() => size = value);
+          TextButton(
+            onPressed: () {
+              setState(() {
+                selected = !selected;
+              });
             },
+            child: const Text(
+              'Click Me',
+              style: TextStyle(fontSize: 20),
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          AnimatedSize(
-            curve: Curves.easeIn,
-            duration: const Duration(seconds: 1),
-            child: FlutterLogo(
-              size: size,
+          SizedBox(
+            width: 300,
+            height: 500,
+            child: Stack(
+              children: [
+                AnimatedPositioned(
+                  width: selected ? 300 : 50,
+                  height: selected ? 50 : 300,
+                  top: selected ? 50 : 150,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.elasticInOut,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Icon(
+                        Icons.flutter_dash,
+                        size: constraints.biggest.height,
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );

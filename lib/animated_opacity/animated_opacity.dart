@@ -30,32 +30,33 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  double size = 100;
-
+  double level = 1;
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           const SizedBox(
             height: 20,
           ),
           Slider(
-            value: size,
-            min: 100,
-            max: 400,
+            value: level,
+            min: 0,
+            max: 1,
             onChanged: (double value) {
-              setState(() => size = value);
+              setState(() => level = value);
             },
           ),
           const SizedBox(
             height: 20,
           ),
-          AnimatedSize(
-            curve: Curves.easeIn,
+          AnimatedOpacity(
+            opacity: level,
+            curve: Curves.fastOutSlowIn,
             duration: const Duration(seconds: 1),
-            child: FlutterLogo(
-              size: size,
+            child: const FlutterLogo(
+              size: 250,
             ),
           )
         ],
